@@ -21,9 +21,8 @@ class App extends Component {
 			<div className="App">
 				<CardList name="diyar">
 					{' '}
-					<h1>HIIHAA</h1>
+					{this.state.monsters.map((monster) => <h1 key="{monsters.id}">{monster.name}</h1>)}
 				</CardList>
-				{this.state.monsters.map((monster) => <h1 key="{monsters.id}">{monster.name}</h1>)}
 			</div>
 		);
 	}
