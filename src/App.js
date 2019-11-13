@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 import { CardList } from './components/card-list/card-list.component.jsx';
+import { SearchField } from './components/searchField/searchField.component';
 
 class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			monsters: []
+			monsters: [],
+			searchField: ''
 		};
 	}
 
@@ -17,12 +19,21 @@ class App extends Component {
 	}
 
 	render() {
+		//declare latest state to monsters and searchfield
+		const { monsters, searchField } = this.state;
+
+		//disect monsters
+		const filteredMonsters = monsters.filter((monster) =>
+			monster.name.toLowerCase().includes(searchField.toLowerCase())
+		);
+
 		return (
 			<div className="App">
-				<CardList name="diyar">
-					{' '}
-					{this.state.monsters.map((monster) => <h1 key="{monsters.id}">{monster.name}</h1>)}
-				</CardList>
+				<SearchField
+					placeholder="search for monsters"
+					handleChange={(e) => this.setState({ searchField: e.target.value })}
+				/>
+				<CardList monsters={filteredMonsters}> </CardList>
 			</div>
 		);
 	}
